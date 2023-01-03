@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        {{ - include "app.defaultAnnotations" . | indent 8 }}
+        {{- include "app.defaultAnnotations" . | indent 8 }}
       labels:
         {{- include "app.defaultLabels" . | indent 8 }}
     spec:
@@ -39,7 +39,7 @@ spec:
               containerPort: 8080
               protocol: TCP
             - name: grpc
-              port: 9000
+              containerPort: 9000
               protocol: TCP
           envFrom:
             - configMapRef:
