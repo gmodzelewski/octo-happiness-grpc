@@ -17,4 +17,12 @@ spec:
             subset: v1
             port:
               number: 9000
+    - match:
+        - port: 8080
+      route:
+        - destination:
+            host: octo-happiness-grpc-service
+            subset: v1
+            port:
+              number: 8080
 {{- end }}

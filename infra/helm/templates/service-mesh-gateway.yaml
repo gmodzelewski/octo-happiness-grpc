@@ -2,7 +2,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: {{ .Release.Name }}-gateway
+  name: {{ .Release.Name }}-gateway-grpc
 spec:
   selector:
     istio: ingressgateway
@@ -13,4 +13,10 @@ spec:
         name: grpc
         number: 9000
         protocol: GRPC
+    - hosts:
+        - '*'
+      port:
+        name: main
+        number: 80
+        protocol: HTTP
 {{- end }}
