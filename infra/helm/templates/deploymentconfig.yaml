@@ -29,7 +29,6 @@ spec:
         {{- include "app.defaultAnnotations" . | indent 8 }}
       labels:
         {{- include "app.defaultLabels" . | indent 8 }}
-        version: v1
     spec:
       containers:
         - image: "{{ include "app.fullname" . }}:{{ .Chart.AppVersion }}"
