@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: {{ include "app.fullname" . }}-run-{{ .Release.Revision }}
+  annotation:
+    operator.tekton.dev/prune.resources: "taskrun, pipelinerun"
+    operator.tekton.dev/prune.keep-since: 7200
+  labels:
+    tekton.dev/pipeline: build-maven
+    {{- include "app.defaultLabels" . | indent 4 }}
+spec:
+  pipelineRef:
+    name: build-via-dockerfile
+  serviceAccountName: pipeline
+  timeout: 1h0m0s
+  params:
+    - name: appversion
+      value: {{ .Chart.AppVersion }}
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: builder-maven-pvc
+    - configMap:
+        name: maven-settings
+      name: maven-settings
