@@ -28,6 +28,9 @@ app.kubernetes.io/app-version: {{ .Chart.AppVersion }}
 app.openshift.io/runtime: quarkus
 app.openshift.io/runtime-namespace: {{ .Release.Namespace }}
 app.openshift.io/runtime-version: {{ .Chart.AppVersion }}
+{{- end -}}
+
+{{- define "app.defaultAnnotations" }}
 {{- if has "servicemesh" .Values.feature }}
 sidecar.istio.io/inject: "true"
 {{- end -}}

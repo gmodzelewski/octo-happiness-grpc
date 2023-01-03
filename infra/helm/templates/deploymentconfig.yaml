@@ -1,7 +1,8 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  annotations: 
+  annotations:
+    {{- include "app.defaultAnnotations" . | indent 4 }}
     app.openshift.io/vcs-uri: 'https://github.com/sa-mw-dach/octo-happiness-template-java'
   labels:
     {{- include "app.defaultLabels" . | indent 4 }}
