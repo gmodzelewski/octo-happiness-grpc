@@ -1,0 +1,16 @@
+{{- if has "servicemesh" .Values.feature }}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: {{ .Release.Name }}-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - '*'
+      port:
+        name: grpc
+        number: 9000
+        protocol: GRPC
+{{- end }}

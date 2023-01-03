@@ -1,0 +1,12 @@
+{{- if has "servicemesh" .Values.feature }}
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: {{ .Release.Name }}-dr
+spec:
+  host: {{ .Release.Name }}-service
+  subsets:
+    - name: v1
+      labels:
+        app.kubernetes.io/app-version: v1.0.1-SNAPSHOT
+{{- end }}
