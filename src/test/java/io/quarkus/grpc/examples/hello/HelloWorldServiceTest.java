@@ -1,14 +1,5 @@
 package io.quarkus.grpc.examples.hello;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import examples.GreeterGrpc;
 import examples.HelloReply;
 import examples.HelloRequest;
@@ -16,6 +7,14 @@ import examples.MutinyGreeterGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @QuarkusTest
 class HelloWorldServiceTest {
@@ -34,7 +33,7 @@ class HelloWorldServiceTest {
     }
 
     @Test
-    public void testHelloWorldServiceUsingBlockingStub() {
+    void testHelloWorldServiceUsingBlockingStub() {
         GreeterGrpc.GreeterBlockingStub client = GreeterGrpc.newBlockingStub(channel);
         HelloReply reply = client
                 .sayHello(HelloRequest.newBuilder().setName("neo-blocking").build());
@@ -42,7 +41,7 @@ class HelloWorldServiceTest {
     }
 
     @Test
-    public void testHelloWorldServiceUsingMutinyStub() {
+    void testHelloWorldServiceUsingMutinyStub() {
         HelloReply reply = MutinyGreeterGrpc.newMutinyStub(channel)
                 .sayHello(HelloRequest.newBuilder().setName("neo-blocking").build())
                 .await().atMost(Duration.ofSeconds(5));
