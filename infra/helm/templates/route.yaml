@@ -7,6 +7,9 @@ metadata:
 spec:
   port:
     targetPort: main
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: None
   to:
     kind: Service
     name: {{ .Release.Name }}-service
