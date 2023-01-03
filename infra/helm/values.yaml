@@ -8,3 +8,5 @@ config:
 git:
     url: https://github.com/gmodzelewski/octo-happiness-grpc.git
     
+feature:
+    - servicemesh

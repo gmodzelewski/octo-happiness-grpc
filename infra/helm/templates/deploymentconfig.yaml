@@ -5,9 +5,6 @@ metadata:
     app.openshift.io/vcs-uri: 'https://github.com/sa-mw-dach/octo-happiness-template-java'
   labels:
     {{- include "app.defaultLabels" . | indent 4 }}
-    app.openshift.io/runtime: quarkus
-    app.openshift.io/runtime-namespace: {{ .Release.Namespace }}
-    app.openshift.io/runtime-version: {{ .Chart.AppVersion }}
   name: {{ include "app.fullname" . }}
 spec:
   replicas: {{ .Values.deployment.replicas | default 1 }}

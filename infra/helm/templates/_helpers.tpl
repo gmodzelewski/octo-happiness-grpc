@@ -25,6 +25,12 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/version: {{ .Chart.Version }}
 app.kubernetes.io/app-version: {{ .Chart.AppVersion }}
+app.openshift.io/runtime: quarkus
+app.openshift.io/runtime-namespace: {{ .Release.Namespace }}
+app.openshift.io/runtime-version: {{ .Chart.AppVersion }}
+{{- if has "servicemesh" .Values.feature }}
+sidecar.istio.io/inject: "true"
+{{- end -}}
 {{- end -}}
 
 {{- define "app.matchLabels" }}
