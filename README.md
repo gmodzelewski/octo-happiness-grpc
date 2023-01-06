@@ -50,3 +50,19 @@ You can compile the application into a native binary using:
 and run with:
 
 `./target/grpc-plain-text-quickstart-1.0.0-SNAPSHOT-runner` 
+
+
+
+
+---
+
+````shell
+watch curl -s -w %{http_code}  http://istio-ingressgateway-service-mesh.apps.ocp.ocp-gm.de:80/hello/testme
+watch "grpcurl -plaintext -H 'username: octo' istio-ingressgateway-service-mesh.ap
+ps.ocp.ocp-gm.de:80 helloworld.Greeter/SayHello"
+
+helm upgrade -i octo-happiness-grpc infra/helm
+
+watch istioctl proxy-config listener istio-ingressgateway-77fbfc45cf-rn8zp -n service-mesh
+watch istioctl proxy-config routes istio-ingressgateway-77fbfc45cf-rn8zp -n service-meshs
+````

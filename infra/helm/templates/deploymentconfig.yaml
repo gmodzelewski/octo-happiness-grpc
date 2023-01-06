@@ -3,7 +3,6 @@ kind: DeploymentConfig
 metadata:
   annotations:
     {{- include "app.defaultAnnotations" . | indent 4 }}
-    app.openshift.io/vcs-uri: 'https://github.com/sa-mw-dach/octo-happiness-template-java'
   labels:
     {{- include "app.defaultLabels" . | indent 4 }}
   name: {{ include "app.fullname" . }}
@@ -30,6 +29,7 @@ spec:
       labels:
         {{- include "app.defaultLabels" . | indent 8 }}
     spec:
+      serviceAccountName: {{ .Release.Name }}-sa
       containers:
         - image: "{{ include "app.fullname" . }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: IfNotPresent
@@ -45,6 +45,14 @@ spec:
             - configMapRef:
                 name: {{ include "app.fullname" . }}-config
           resources: {}
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop: [ "ALL" ]
+            seccompProfile:
+              type: RuntimeDefault
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           {{- if .Values.deployment.includeHealthChecks }}
@@ -69,6 +77,4 @@ spec:
           {{- end }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
       terminationGracePeriodSeconds: 30

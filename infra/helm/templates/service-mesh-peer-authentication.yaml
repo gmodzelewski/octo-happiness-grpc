@@ -1,0 +1,9 @@
+#{{- if has "servicemesh" .Values.feature }}
+#apiVersion: security.istio.io/v1beta1
+#kind: PeerAuthentication
+#metadata:
+#  name: mtls
+#spec:
+#  mtls:
+#    mode: STRICT
+#{{- end }}

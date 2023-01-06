@@ -6,7 +6,7 @@ metadata:
 spec:
   host: {{ .Release.Name }}-service
   subsets:
-    - name: v1
+    - name: dev
       labels:
-        version: v1
+        app.kubernetes.io/version: {{ .Chart.Version }}
 {{- end }}

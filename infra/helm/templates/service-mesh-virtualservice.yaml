@@ -1,5 +1,5 @@
 {{- if has "servicemesh" .Values.feature }}
-apiVersion: networking.istio.io/v1beta1
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: {{ .Release.Name }}-vs
@@ -9,20 +9,35 @@ spec:
   hosts:
     - '*'
   http:
-    - match:
-        - port: 9000
+    - name: "hello route"
+      match:
+        - uri:
+            exact: /hello/testme
       route:
         - destination:
             host: {{ .Release.Name }}-service
-            subset: v1
-            port:
-              number: 9000
-    - match:
-        - port: 8080
-      route:
-        - destination:
-            host: {{ .Release.Name }}-service
-            subset: v1
+            subset: dev
             port:
               number: 8080
+#      fault:
+#        abort:
+#          percentage:
+#            value: 100
+#          httpStatus: 400
+    - name: "grpc route"
+      match:
+        - headers:
+            username:
+              exact: "octo"
+      route:
+        - destination:
+            host: {{ .Release.Name }}-service
+            subset: dev
+            port:
+              number: 9000
+#      fault:
+#        abort:
+#          percentage:
+#            value: 100
+#          httpStatus: 415
 {{- end }}

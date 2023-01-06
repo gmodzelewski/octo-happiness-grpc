@@ -7,16 +7,16 @@ spec:
   selector:
     istio: ingressgateway
   servers:
-    - hosts:
-        - '*'
-      port:
-        name: grpc
-        number: 9000
-        protocol: GRPC
-    - hosts:
-        - '*'
-      port:
-        name: main
+    - port:
         number: 80
+        name: http
         protocol: HTTP
+      hosts:
+        - '*'
+    - port:
+        number: 80
+        name: grpc
+        protocol: GRPC
+      hosts:
+        - '*'
 {{- end }}

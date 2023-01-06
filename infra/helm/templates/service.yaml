@@ -8,11 +8,7 @@ spec:
   ports:
   - name: main
     port: 8080
-    protocol: TCP
   - name: grpc
     port: 9000
-    protocol: TCP
   selector:
     {{- include "app.matchLabels" . | indent 8 }}
-  sessionAffinity: None
-  type: ClusterIP

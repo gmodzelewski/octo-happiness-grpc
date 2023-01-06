@@ -1,3 +1,4 @@
+{{- if not (has "servicemesh" .Values.feature) }}
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
@@ -7,6 +8,10 @@ metadata:
 spec:
   port:
     targetPort: grpc
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: None
   to:
     kind: Service
     name: {{ .Release.Name }}-service
+{{- end }}

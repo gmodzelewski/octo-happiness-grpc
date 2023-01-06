@@ -28,12 +28,10 @@ app.kubernetes.io/app-version: {{ .Chart.AppVersion }}
 app.openshift.io/runtime: quarkus
 app.openshift.io/runtime-namespace: {{ .Release.Namespace }}
 app.openshift.io/runtime-version: {{ .Chart.AppVersion }}
-{{- if has "servicemesh" .Values.feature }}
-version: v1
-{{- end -}}
 {{- end -}}
 
 {{- define "app.defaultAnnotations" }}
+app.openshift.io/vcs-uri: {{ coalesce (.Values.git).url "https://github.com/sa-mw-dach/octo-happiness-template-java" }}
 {{- if has "servicemesh" .Values.feature }}
 sidecar.istio.io/inject: "true"
 {{- end -}}
