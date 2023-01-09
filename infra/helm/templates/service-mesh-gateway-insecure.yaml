@@ -1,0 +1,16 @@
+{{- if has "servicemesh" .Values.feature }}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: grpc-insecure
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+    - port:
+        number: 80
+        name: main-insecure
+        protocol: HTTP
+      hosts:
+        - '*'
+{{- end }}

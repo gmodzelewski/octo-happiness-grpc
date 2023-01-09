@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "app.fullname" . }}-certificate
+  namespace: service-mesh
+spec:
+  secretName: {{ .Release.Name }}-tls
+  dnsNames:
+    - 'octo-service-mesh.apps.ocp.ocp-gm.de'
+    - 'istio-ingressgateway-service-mesh.apps.ocp.ocp-gm.de'
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer

@@ -2,15 +2,17 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ .Release.Name }}-vs
+  name: {{ include "app.fullname" . }}-vs
 spec:
   gateways:
-    - {{ .Release.Name }}-gateway
+    - grpc
+    - grpc-insecure
   hosts:
     - '*'
   http:
     - name: "hello route"
       match:
+        - port: 8080
         - uri:
             exact: /hello/testme
       route:
@@ -26,6 +28,7 @@ spec:
 #          httpStatus: 400
     - name: "grpc route"
       match:
+        - port: 9000
         - headers:
             username:
               exact: "octo"

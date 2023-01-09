@@ -1,14 +1,14 @@
-#{{- if has "servicemesh" .Values.feature }}
-#apiVersion: cert-manager.io/v1
-#kind: Certificate
-#metadata:
-#  name: {{ .Release.Name }}-certificate
-#spec:
-#  secretName: {{ .Release.Name }}-tls
-#  dnsNames:
-#    - {{ .Release.Name }}-route-{{ .Release.Namespace }}.apps.ocp.ocp-gm.de
-##    - istio-ingressgateway-service-mesh.apps.ocp.ocp-gm.de
-#  issuerRef:
-#    name: letsencrypt-staging
-#    kind: ClusterIssuer
-#{{- end -}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "app.fullname" . }}-certificate
+spec:
+  secretName: {{ .Release.Name }}-tls
+  dnsNames:
+    - {{ .Release.Name }}-route-{{ .Release.Namespace }}.apps.ocp.ocp-gm.de
+    # == octo-happiness-grpc-route-octo-happiness.apps.ocp.ocp-gm.de    
+    - {{ .Release.Name }}-route-grpc-{{ .Release.Namespace }}.apps.ocp.ocp-gm.de
+    # == octo-happiness-grpc-route-grpc-octo-happiness.apps.ocp.ocp-gm.de
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
