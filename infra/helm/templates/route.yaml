@@ -11,8 +11,9 @@ metadata:
     haproxy.router.openshift.io/hsts_header: max-age=31536000;includeSubDomains;preload
   name: {{ .Release.Name }}-route
 spec:
+  host: "{{ .Release.Name }}-route-{{ .Release.Namespace }}.apps.ocp.ocp-gm.de"
   tls:
-    termination: reencrypt
+    termination: passthrough
   port:
     targetPort: main
   to:
