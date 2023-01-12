@@ -5,16 +5,13 @@ metadata:
   name: {{ include "app.fullname" . }}-vs
 spec:
   gateways:
-    - grpc
-    - grpc-insecure
+    - octo-gateway
   hosts:
     - '*'
   http:
     - name: "hello route"
       match:
-        - port: 8080
-        - uri:
-            exact: /hello/testme
+        - port: 443
       route:
         - destination:
             host: {{ .Release.Name }}-service
@@ -28,7 +25,7 @@ spec:
 #          httpStatus: 400
     - name: "grpc route"
       match:
-        - port: 9000
+        - port: 80
         - headers:
             username:
               exact: "octo"

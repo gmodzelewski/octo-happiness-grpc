@@ -2,24 +2,27 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: grpc
+  name: octo-gateway
 spec:
   selector:
     istio: ingressgateway # use istio default controller
   servers:
-    - port:
-        number: 8080
+    - hosts:
+        - "*"
+      port:
+        number: 443
         name: main
         protocol: HTTPS
-      hosts:
-        - "octo-service-mesh.apps.ocp.ocp-gm.de"
       tls:
         mode: SIMPLE
-        credentialName: {{ .Release.Name }}-tls
+        credentialName: {{ include "app.fullname" . }}-certificate
     - port:
-        number: 9000
+        number: 80
         name: grpc
-        protocol: GRPC
+        protocol: grpc
       hosts:
-        - "octo-service-mesh-grpc.apps.ocp.ocp-gm.de"
+        - "*"
+      # tls:
+      #   mode: SIMPLE
+      #   credentialName: ingressgateway-certs
 {{- end }}

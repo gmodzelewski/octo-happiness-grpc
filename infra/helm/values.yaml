@@ -1,12 +1,12 @@
 deployment:
-    replicas: 1
-    includeHealthChecks: false
+  replicas: 1
+  includeHealthChecks: false
 
 config:
-    greeting: 'Hello World.'
+  greeting: 'Hello World.'
 
 git:
-    url: https://github.com/gmodzelewski/octo-happiness-grpc.git
+  url: https://github.com/gmodzelewski/octo-happiness-grpc.git
     
 feature:
-    - servicemesh
+  - servicemesh

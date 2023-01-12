@@ -4,7 +4,11 @@ metadata:
   labels:
     {{- include "app.defaultLabels" . | indent 4 }}
   annotations:
-    cert-utils-operator.redhat-cop.io/certs-from-secret: "{{ .Release.Name }}-tls"
+    cert-utils-operator.redhat-cop.io/certs-from-secret: "{{ include "app.fullname" . }}-certificate"
+    cert-utils-operator.redhat-cop.io/cert-soon-to-expire-threshold: "1h"
+    cert-utils-operator.redhat-cop.io/inject-CA: "true"
+    cert-utils-operator.redhat-cop.io/generate-cert-info: "true"
+    haproxy.router.openshift.io/hsts_header: max-age=31536000;includeSubDomains;preload
   name: {{ .Release.Name }}-route
 spec:
   tls:
