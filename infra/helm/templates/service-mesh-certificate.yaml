@@ -10,5 +10,5 @@ spec:
     - {{ .Release.Name }}-route-grpc-{{ .Release.Namespace }}.apps.ocp.ocp-gm.de
     # == octo-happiness-grpc-route-grpc-octo-happiness.apps.ocp.ocp-gm.de
   issuerRef:
-    name: letsencrypt-production
+    name: letsencrypt-staging
     kind: ClusterIssuer

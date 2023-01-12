@@ -12,6 +12,6 @@ spec:
     - 'istio-ingressgateway-service-mesh.apps.ocp.ocp-gm.de'
     - 'octo-happiness-grpc-525eca1d5089dbdc-service-mesh.apps.ocp.ocp-gm.de'
   issuerRef:
-    name: letsencrypt-production
+    name: letsencrypt-staging
     kind: ClusterIssuer
 {{- end }}
