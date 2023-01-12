@@ -34,10 +34,6 @@ spec:
         - image: "{{ include "app.fullname" . }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: IfNotPresent
           name: {{ include "app.fullname" . }}
-          volumeMounts:
-            - mountPath: /etc/certs
-              name: volume-certs
-              readOnly: true
           ports:
             - name: main
               containerPort: 8080
@@ -79,11 +75,6 @@ spec:
             successThreshold: 1
             failureThreshold: 3
           {{- end }}
-      volumes:
-        - name: volume-certs
-          secret:
-            optional: false
-            secretName: {{ include "app.fullname" . }}-certificate
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
