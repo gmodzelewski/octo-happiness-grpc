@@ -4,23 +4,28 @@ kind: VirtualService
 metadata:
   name: {{ include "app.fullname" . }}-vs
 spec:
-  gateways:
-    - octo-gateway
   hosts:
     - "octo-service-mesh.apps.ocp.ocp-gm.de"
+  gateways:
+    - grpc-insecure
   http:
-    - name: "hello route"
+    - name: "hello route insecure"
       match:
-        - port: 443
+        - port: 80
       route:
         - destination:
             host: {{ .Release.Name }}-service
             subset: dev
             port:
               number: 8080
+#      fault:
+#        abort:
+#          percentage:
+#            value: 100
+#          httpStatus: 400
     - name: "grpc route"
       match:
-        - port: 80
+        - port: 9000
         - headers:
             username:
               exact: "octo"

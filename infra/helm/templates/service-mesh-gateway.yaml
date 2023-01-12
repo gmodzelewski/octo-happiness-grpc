@@ -8,7 +8,7 @@ spec:
     istio: ingressgateway # use istio default controller
   servers:
     - hosts:
-        - "*"
+        - "octo-service-mesh.apps.ocp.ocp-gm.de"
       port:
         number: 443
         name: main
@@ -16,12 +16,12 @@ spec:
       tls:
         mode: SIMPLE
         credentialName: {{ include "app.fullname" . }}-certificate
-    - port:
+    - hosts:
+        - "octo-service-mesh-gprc.apps.ocp.ocp-gm.de"
+      port:
         number: 80
         name: grpc
         protocol: grpc
-      hosts:
-        - "*"
       # tls:
       #   mode: SIMPLE
       #   credentialName: ingressgateway-certs
