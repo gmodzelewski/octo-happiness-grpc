@@ -1,4 +1,3 @@
-{{- if not (has "servicemesh" .Values.feature) }}
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
@@ -6,6 +5,9 @@ metadata:
     {{- include "app.defaultLabels" . | indent 4 }}
   annotations:
     cert-utils-operator.redhat-cop.io/certs-from-secret: "{{ .Release.Name }}-tls"
+    cert-utils-operator.redhat-cop.io/cert-soon-to-expire-threshold: "1h"
+    cert-utils-operator.redhat-cop.io/inject-CA: "true"
+    cert-utils-operator.redhat-cop.io/generate-cert-info: "true"
   name: {{ .Release.Name }}-route-grpc
 spec:
   tls:
@@ -15,4 +17,3 @@ spec:
   to:
     kind: Service
     name: {{ .Release.Name }}-service
-{{- end }}

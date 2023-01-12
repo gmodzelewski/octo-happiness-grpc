@@ -5,10 +5,10 @@ metadata:
 spec:
   secretName: {{ include "app.fullname" . }}-certificate
   dnsNames:
-    - {{ .Release.Name }}-route-{{ .Release.Namespace }}.apps.ocp.ocp-gm.de
-    # == octo-happiness-grpc-route-octo-happiness.apps.ocp.ocp-gm.de    
-    - {{ .Release.Name }}-route-grpc-{{ .Release.Namespace }}.apps.ocp.ocp-gm.de
-    # == octo-happiness-grpc-route-grpc-octo-happiness.apps.ocp.ocp-gm.de
+    - octo-happiness-grpc-route-octo-happiness.apps.ocp.ocp-gm.de
+    - octo-happiness-grpc-route-grpc-octo-happiness.apps.ocp.ocp-gm.de
+#    - {{ .Release.Name }}-route-grpc-{{ .Release.Namespace }}.apps.ocp.ocp-gm.de
+#    - {{ .Release.Name }}-route-{{ .Release.Namespace }}.apps.ocp.ocp-gm.de
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer

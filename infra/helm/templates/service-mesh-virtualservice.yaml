@@ -6,12 +6,22 @@ metadata:
 spec:
   gateways:
     - octo-gateway
+    - grpc-insecure
   hosts:
     - '*'
   http:
     - name: "hello route"
       match:
         - port: 443
+      route:
+        - destination:
+            host: {{ .Release.Name }}-service
+            subset: dev
+            port:
+              number: 8080
+    - name: "hello route insecure"
+      match:
+        - port: 80
       route:
         - destination:
             host: {{ .Release.Name }}-service

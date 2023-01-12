@@ -11,4 +11,4 @@ spec:
   - name: grpc
     port: 9000
   selector:
-    {{- include "app.matchLabels" . | indent 8 }}
+    {{- include "app.matchLabels" . | indent 4 }}
