@@ -10,26 +10,12 @@ spec:
     - "octo-service-mesh.apps.ocp.ocp-gm.de"
   http:
     - name: "hello route"
-      match:
-        - port: 443
       route:
         - destination:
             host: {{ .Release.Name }}-service
             subset: dev
             port:
               number: 8080
-    - name: "grpc route"
-      match:
-        - port: 80
-        - headers:
-            username:
-              exact: "octo"
-      route:
-        - destination:
-            host: {{ .Release.Name }}-service
-            subset: dev
-            port:
-              number: 9000
 #      fault:
 #        abort:
 #          percentage:

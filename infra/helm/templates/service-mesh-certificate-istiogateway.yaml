@@ -8,8 +8,8 @@ spec:
   secretName: ingressgateway-certs
   commonName: octo-service-mesh.apps.ocp.ocp-gm.de
   dnsNames:
-    - 'octo-service-mesh.apps.ocp.ocp-gm.de'
+    - octo-service-mesh.apps.ocp.ocp-gm.de
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-production
     kind: ClusterIssuer
 {{- end }}

@@ -16,10 +16,8 @@ spec:
     - hosts:
         - "octo-service-mesh-insecure-gprc.apps.ocp.ocp-gm.de"
       port:
-        number: 9000
+        number: 443
         name: grpc
-        protocol: grpc
-      # tls:
-      #   mode: SIMPLE
-      #   credentialName: ingressgateway-certs
+        protocol: GRPC
+#        protocol: GRPC-WEB
 {{- end }}
