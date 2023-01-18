@@ -38,6 +38,9 @@ spec:
             - name: main
               containerPort: 8080
               protocol: TCP
+            - name: https
+              containerPort: 8443
+              protocol: TCP
             - name: grpc
               containerPort: 9000
               protocol: TCP
@@ -55,7 +58,6 @@ spec:
               type: RuntimeDefault
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-          {{- if .Values.deployment.includeHealthChecks }}
           readinessProbe:
             httpGet:
               path: /q/health/ready
@@ -74,7 +76,6 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             failureThreshold: 3
-          {{- end }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
