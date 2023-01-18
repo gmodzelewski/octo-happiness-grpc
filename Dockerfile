@@ -47,6 +47,8 @@ COPY --chown=1001 target/quarkus-app/app/ /deployments/app/
 COPY --chown=1001 target/quarkus-app/quarkus/ /deployments/quarkus/
 
 EXPOSE 8080
+EXPOSE 8443
+EXPOSE 9000
 USER 1001
 
 ENTRYPOINT [ "/deployments/run-java.sh" ]
