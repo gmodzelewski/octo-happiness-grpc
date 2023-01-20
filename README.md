@@ -1,4 +1,3 @@
-[![Contribute](https://www.eclipse.org/che/contribute.svg)]("https://devspaces.apps.ocp.ocp-gm.de/#https://github.com/gmodzelewski/octo-happiness-grpc.git)
 
 # octo-happiness-grpc
 
