@@ -7,7 +7,8 @@ metadata:
     operator.tekton.dev/prune.keep-since: 7200
   labels:
     tekton.dev/pipeline: build-maven
-    {{- include "app.defaultLabels" . | indent 4 }}
+    app.kubernetes.io/name: {{ include "app.fullname" . }}
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
 spec:
   pipelineRef:
     name: build-via-dockerfile

@@ -15,4 +15,10 @@ spec:
       tls:
         mode: SIMPLE
         credentialName: {{ include "app.fullname" . }}-certificate
-{{- end }}
+    - hosts:
+        - "octo-service-mesh.apps.ocp.ocp-gm.de"
+      port:
+        number: 9000
+        name: grpc
+        protocol: GRPC
+  {{- end }}

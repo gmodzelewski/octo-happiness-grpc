@@ -38,9 +38,6 @@ spec:
             - name: main
               containerPort: 8080
               protocol: TCP
-            - name: https
-              containerPort: 8443
-              protocol: TCP
             - name: grpc
               containerPort: 9000
               protocol: TCP

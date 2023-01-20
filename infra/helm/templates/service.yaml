@@ -7,10 +7,13 @@ metadata:
 spec:
   ports:
   - name: main
-    port: 8080
+    port: 80
+    targetPort: main
+  - name: https
+    port: 443
     targetPort: main
   - name: grpc
-    port: 8443
+    port: 9000
     targetPort: grpc
   selector:
     {{- include "app.matchLabels" . | indent 4 }}
