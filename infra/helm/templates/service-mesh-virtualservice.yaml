@@ -5,19 +5,9 @@ metadata:
   name: {{ include "app.fullname" . }}-vs
 spec:
   gateways:
-    - octo-gateway
+    - service-mesh/octo-gateway
   hosts:
-    - "*"
-  tls:
-    - match:
-        - sniHosts:
-            - "octo-service-mesh.apps.ocp.ocp-gm.de"
-      route:
-        - destination:
-            host: {{ .Release.Name }}-service
-            subset: dev
-            port:
-              number: 8080
+    - "octo-service-mesh.apps.ocp.ocp-gm.de"
   http:
     - name: "hello route"
       route:
@@ -26,23 +16,18 @@ spec:
             subset: dev
             port:
               number: 8080
-      fault:
-        abort:
-          percentage:
-            value: 100
-          httpStatus: 415
-#    - name: "grpc route"
-#      match:
-#        - port: 9000
-#      route:
-#        - destination:
-#            host: {{ .Release.Name }}-service
-#            subset: dev
-#            port:
-#              number: 9000
-#      fault:
-#        abort:
-#          percentage:
-#            value: 100
-#          httpStatus: 415
+    - name: "grpc route"
+      match:
+        - port: 9000
+      route:
+        - destination:
+            host: {{ .Release.Name }}-service
+            subset: dev
+            port:
+              number: 9000
+      # fault:
+      #   abort:
+      #     percentage:
+      #       value: 100
+      #     httpStatus: 415
 {{- end }}

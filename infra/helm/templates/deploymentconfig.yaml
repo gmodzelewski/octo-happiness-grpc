@@ -28,6 +28,9 @@ spec:
         {{- include "app.defaultAnnotations" . | indent 8 }}
       labels:
         {{- include "app.defaultLabels" . | indent 8 }}
+        {{- if has "servicemesh" .Values.feature }}
+        sidecar.istio.io/inject: "true"
+        {{- end }}
     spec:
       serviceAccountName: {{ .Release.Name }}-sa
       containers:
@@ -35,7 +38,7 @@ spec:
           imagePullPolicy: IfNotPresent
           name: {{ include "app.fullname" . }}
           ports:
-            - name: main
+            - name: http-main
               containerPort: 8080
               protocol: TCP
             - name: grpc

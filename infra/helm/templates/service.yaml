@@ -6,12 +6,12 @@ metadata:
   name: {{ .Release.Name }}-service
 spec:
   ports:
-  - name: main
-    port: 80
-    targetPort: main
-  - name: https
-    port: 443
-    targetPort: main
+  - name: http-main
+    port: 8080
+    targetPort: http-main
+  - name: https-main
+    port: 8443
+    targetPort: http-main
   - name: grpc
     port: 9000
     targetPort: grpc

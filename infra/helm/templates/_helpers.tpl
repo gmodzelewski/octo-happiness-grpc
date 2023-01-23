@@ -32,9 +32,6 @@ app.openshift.io/runtime-version: {{ .Chart.AppVersion }}
 
 {{- define "app.defaultAnnotations" }}
 app.openshift.io/vcs-uri: {{ coalesce (.Values.git).url "https://github.com/sa-mw-dach/octo-happiness-template-java" }}
-{{- if has "servicemesh" .Values.feature }}
-sidecar.istio.io/inject: "true"
-{{- end -}}
 {{- end -}}
 
 {{- define "app.matchLabels" }}
