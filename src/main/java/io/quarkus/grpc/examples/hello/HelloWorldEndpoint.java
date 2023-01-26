@@ -9,6 +9,9 @@ import io.smallrye.mutiny.Uni;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.inject.Inject;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Tags;
 
 @Path("/hello")
 public class HelloWorldEndpoint {
@@ -19,9 +22,13 @@ public class HelloWorldEndpoint {
     @GrpcClient("hello")
     Greeter helloService;
 
+    @Inject
+    MeterRegistry registry;
+
     @GET
     @Path("/testme")
     public String sayHello() {
+        registry.counter("greeting_counter", Tags.of("root", "hello")).increment();
         return "hello";
     }
 
