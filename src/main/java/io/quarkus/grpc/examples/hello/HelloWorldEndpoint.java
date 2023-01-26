@@ -1,17 +1,17 @@
 package io.quarkus.grpc.examples.hello;
 
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
 import examples.Greeter;
 import examples.GreeterGrpc;
 import examples.HelloReply;
 import examples.HelloRequest;
-import io.quarkus.grpc.GrpcClient;
-import io.smallrye.mutiny.Uni;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.inject.Inject;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;
+import io.quarkus.grpc.GrpcClient;
+import io.smallrye.mutiny.Uni;
 
 @Path("/hello")
 public class HelloWorldEndpoint {
@@ -48,6 +48,7 @@ public class HelloWorldEndpoint {
     }
 
     public String generateResponse(HelloReply reply) {
-        return String.format("%s! HelloWorldService has been called %d number of times.", reply.getMessage(), reply.getCount());
+        return String.format("%s! HelloWorldService has been called %d number of times.", reply.getMessage(),
+                reply.getCount());
     }
 }

@@ -1,10 +1,11 @@
 package io.quarkus.grpc.examples.hello;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tags;
-import javax.inject.Inject;
 
 @Path("/")
 public class RootEndpoint {

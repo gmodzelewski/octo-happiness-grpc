@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     {{- include "app.defaultLabels" . | indent 4 }}
-  name: {{ .Release.Name }}-service
+  name: {{ include "app.fullname" . }}-service
 spec:
   ports:
   - name: http-main

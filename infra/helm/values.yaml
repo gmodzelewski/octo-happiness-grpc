@@ -1,6 +1,5 @@
 deployment:
   replicas: 1
-  includeHealthChecks: false
 
 config:
   greeting: 'Hello World.'

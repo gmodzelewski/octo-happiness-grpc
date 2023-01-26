@@ -28,6 +28,7 @@ app.kubernetes.io/app-version: {{ .Chart.AppVersion }}
 app.openshift.io/runtime: quarkus
 app.openshift.io/runtime-namespace: {{ .Release.Namespace }}
 app.openshift.io/runtime-version: {{ .Chart.AppVersion }}
+app-with-metrics: 'quarkus-app'
 {{- end -}}
 
 {{- define "app.defaultAnnotations" }}

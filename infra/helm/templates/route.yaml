@@ -3,17 +3,12 @@ kind: Route
 metadata:
   labels:
     {{- include "app.defaultLabels" . | indent 4 }}
-  annotations:
-    cert-utils-operator.redhat-cop.io/certs-from-secret: '{{ include "app.fullname" . }}-certificate'
-    cert-utils-operator.redhat-cop.io/cert-soon-to-expire-threshold: "1h"
-    cert-utils-operator.redhat-cop.io/inject-CA: "true"
-    cert-utils-operator.redhat-cop.io/generate-cert-info: "true"
-  name: {{ .Release.Name }}-route
+  name: {{ include "app.fullname" . }}-route
 spec:
   tls:
-    termination: reencrypt
+    termination: edge
   port:
-    targetPort: main
+    targetPort: http-main
   to:
     kind: Service
-    name: {{ .Release.Name }}-service
+    name: {{ include "app.fullname" . }}-service
