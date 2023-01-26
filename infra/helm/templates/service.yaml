@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     {{- include "app.defaultLabels" . | indent 4 }}
+    component: {{ include "app.fullname" . }}-service
   name: {{ include "app.fullname" . }}-service
 spec:
   ports:

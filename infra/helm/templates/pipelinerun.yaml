@@ -12,7 +12,7 @@ metadata:
 spec:
   pipelineRef:
     name: build-via-dockerfile
-  serviceAccountName: pipeline
+  serviceAccountName: pipeline-bot
   timeout: 1h0m0s
   params:
     - name: appversion

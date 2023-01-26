@@ -4,16 +4,16 @@ kind: ServiceMonitor
 metadata:
   labels:
     k8s-app: prometheus-app-monitor
+    component: service-monitor
   name: {{ include "app.fullname" . }}
 spec:
   endpoints:
   - interval: 30s
-    targetPort: 8080
+    port: http-main
+    path: /q/metrics
     scheme: http
-  namespaceSelector:
-    matchNames:
-      - octo-happiness
   selector:
     matchLabels:
-      app-with-metrics: 'quarkus-app'
+      {{- include "app.matchLabels" . | indent 6 }}
+      component: {{ include "app.fullname" . }}-service
 {{- end }}
