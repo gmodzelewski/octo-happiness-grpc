@@ -3,14 +3,12 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    k8s-app: prometheus-app-monitor
     component: service-monitor
   name: {{ include "app.fullname" . }}
 spec:
   endpoints:
   - interval: 30s
     port: http-main
-    path: /q/metrics
     scheme: http
   selector:
     matchLabels:
