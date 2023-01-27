@@ -10,6 +10,7 @@ spec:
   - interval: 30s
     port: http-main
     scheme: http
+    path: /q/metrics
   selector:
     matchLabels:
       {{- include "app.matchLabels" . | indent 6 }}
