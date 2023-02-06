@@ -69,3 +69,14 @@ helm upgrade -i octo-happiness-grpc infra/helm
 watch istioctl proxy-config listener istio-ingressgateway-77fbfc45cf-rn8zp -n service-mesh
 watch istioctl proxy-config routes istio-ingressgateway-77fbfc45cf-rn8zp -n service-meshs
 ````
+
+
+Activate service mesh prometheus data scraping
+````yaml
+    # scrape config for service endpoints.
+    - job_name: greetings
+      scheme: https
+      static_configs:
+      - targets: ['octo-service-mesh.apps.ocp.ocp-gm.de']
+      metrics_path: /q/metrics
+````
