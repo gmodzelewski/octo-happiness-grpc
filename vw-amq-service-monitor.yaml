@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    component: service-monitor
+    application: ex-aao
+  name: vw-amq-broker
+  namespace: vw-amq
+spec:
+  endpoints:
+  - interval: 30s
+    port: wconsj-0
+    scheme: http
+  selector:
+    matchLabels:
+      ActiveMQArtemis: ex-aao
+      application: ex-aao-app
